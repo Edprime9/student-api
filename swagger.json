@@ -5,7 +5,7 @@
     "description": "A simple API for managing Students and their Courses",
     "version": "1.0.0"
   },
-  "host": "https://student-api-421p.onrender.com",
+  "host": "student-api-421p.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
