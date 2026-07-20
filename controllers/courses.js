@@ -5,13 +5,13 @@ const getAll = async (req, res) => {
   try {
     const result = await mongodb
       .getDatabase()
-      .collection('students')
+      .collection('courses')
       .find();
 
-    const students = await result.toArray();
+    const courses = await result.toArray();
 
     res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(students);
+    res.status(200).json(courses);
 
   } catch (err) {
     res.status(500).json(err);
@@ -20,16 +20,16 @@ const getAll = async (req, res) => {
 
 const getSingle = async (req, res) => {
   try {
-    const studentId = new ObjectId(req.params.id);
+    const courseId = new ObjectId(req.params.id);
 
     const result = await mongodb
       .getDatabase()
-      .collection('students')
-      .findOne({ _id: studentId });
+      .collection('courses')
+      .findOne({ _id: courseId });
 
     if (!result) {
       return res.status(404).json({
-        message: 'Student not found'
+        message: 'Course not found'
       });
     }
 
@@ -41,21 +41,21 @@ const getSingle = async (req, res) => {
   }
 };
 
-const createStudent = async (req, res) => {
+const createCourse = async (req, res) => {
   try {
 
-    const student = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      course: req.body.course,
-      level: req.body.level
+    const course = {
+      courseCode: req.body.courseCode,
+      courseName: req.body.courseName,
+      instructor: req.body.instructor,
+      credit: req.body.credit,
+      semester: req.body.semester
     };
 
     const response = await mongodb
       .getDatabase()
-      .collection('students')
-      .insertOne(student);
+      .collection('courses')
+      .insertOne(course);
 
     if (response.acknowledged) {
       res.status(201).json({
@@ -67,26 +67,26 @@ const createStudent = async (req, res) => {
     res.status(500).json(err);
   }
 };
-  const updateStudent = async (req, res) => {
+  const updateCourse = async (req, res) => {
 
   try {
 
-    const studentId = new ObjectId(req.params.id);
+    const courseId = new ObjectId(req.params.id);
 
-    const student = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      course: req.body.course,
-      level: req.body.level
+    const course = {
+      courseCode: req.body.courseCode,
+      courseName: req.body.courseName,
+      instructor: req.body.instructor,
+      credit: req.body.credit,
+      semester: req.body.semester
     };
 
     const response = await mongodb
       .getDatabase()
-      .collection('students')
+      .collection('courses')
       .replaceOne(
-        { _id: studentId },
-        student
+        { _id: courseId },
+        course
       );
 
     if (response.modifiedCount > 0) {
@@ -100,17 +100,17 @@ const createStudent = async (req, res) => {
   }
 };
 
-const deleteStudent = async (req, res) => {
+const deleteCourse = async (req, res) => {
 
   try {
 
-    const studentId = new ObjectId(req.params.id);
+    const courseId = new ObjectId(req.params.id);
 
     const response = await mongodb
       .getDatabase()
-      .collection('students')
+      .collection('courses')
       .deleteOne({
-        _id: studentId
+        _id: courseId
       });
 
     if (response.deletedCount > 0) {
@@ -127,7 +127,7 @@ const deleteStudent = async (req, res) => {
 module.exports = {
   getAll,
   getSingle,
-  createStudent,
-  updateStudent,
-  deleteStudent
+  createCourse,
+  updateCourse,
+  deleteCourse
 };

@@ -1,9 +1,11 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-  res.send('Welcome to the Student API');
+  res.send('Welcome to the Student and Course API');
 });
 
 router.use('/students', require('./students'));
+
+router.use('/courses', require('./courses'));
 
 module.exports = router;
