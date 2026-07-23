@@ -1,5 +1,6 @@
 const mongodb = require('../data/database');
 const { ObjectId } = require('mongodb');
+const { validationResult } = require("express-validator");
 
 const getAll = async (req, res) => {
   try {
@@ -42,6 +43,17 @@ const getSingle = async (req, res) => {
 };
 
 const createCourse = async (req, res) => {
+
+  // Check for validation errors
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      errors: errors.array()
+    });
+  }
+  
+
   try {
 
     const course = {
@@ -67,7 +79,17 @@ const createCourse = async (req, res) => {
     res.status(500).json(err);
   }
 };
-  const updateCourse = async (req, res) => {
+const updateCourse = async (req, res) => {
+
+  // Check for validation errors
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      errors: errors.array()
+    });
+  }
+  
 
   try {
 
