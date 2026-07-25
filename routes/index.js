@@ -4,9 +4,9 @@ const router = require('express').Router();
 
 router.use('/', require('./swagger'));
 
-router.get('/', (req, res) => {
-  res.send('Welcome to the Student and Course API');
-});
+// router.get('/', (req, res) => {
+//   res.send('Welcome to the Student and Course API');
+// });
 
 router.use('/students', require('./students'));
 
