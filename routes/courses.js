@@ -1,22 +1,22 @@
-const express = require("express");
+const express = require('express');
 const router = require('express').Router();
 
 const coursesController = require('../controllers/courses');
-const validation = require("../validation/validator");
-const { isAuthenticated } = require("../validation/authenticate");
+const validation = require('../validation/validator');
+const { isAuthenticated } = require('../validation/authenticate');
 
 router.get('/', coursesController.getAll);
 
 router.get('/:id', coursesController.getSingle);
 
 router.post(
-  "/", isAuthenticated,
+  '/', isAuthenticated,
   validation.courseRules(),
   coursesController.createCourse
 );
 
 router.put(
-  "/:id", isAuthenticated,
+  '/:id', isAuthenticated,
   validation.courseRules(),
   coursesController.updateCourse
 );
