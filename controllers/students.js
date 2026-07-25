@@ -60,7 +60,9 @@ const createStudent = async (req, res) => {
       lastName: req.body.lastName,
       email: req.body.email,
       course: req.body.course,
-      level: req.body.level
+      level: req.body.level,
+      phone: req.body.phone,
+      age: req.body.age
     };
 
     const response = await mongodb
@@ -99,7 +101,9 @@ const updateStudent = async (req, res) => {
       lastName: req.body.lastName,
       email: req.body.email,
       course: req.body.course,
-      level: req.body.level
+      level: req.body.level,
+      phone: req.body.phone,
+      age: req.body.age
     };
 
     const response = await mongodb

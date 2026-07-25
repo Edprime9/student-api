@@ -61,7 +61,9 @@ const createCourse = async (req, res) => {
       courseName: req.body.courseName,
       instructor: req.body.instructor,
       credit: req.body.credit,
-      semester: req.body.semester
+      semester: req.body.semester,
+      department: req.body.department,
+      duration: req.body.duration
     };
 
     const response = await mongodb
@@ -100,7 +102,9 @@ const updateCourse = async (req, res) => {
       courseName: req.body.courseName,
       instructor: req.body.instructor,
       credit: req.body.credit,
-      semester: req.body.semester
+      semester: req.body.semester,
+      department: req.body.department,
+      duration: req.body.duration
     };
 
     const response = await mongodb
